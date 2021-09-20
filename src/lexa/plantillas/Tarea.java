@@ -7,14 +7,13 @@ import static lexa.utils.Utils.ObtenerNuevoId;
 
 public class Tarea {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private String idTarea;
     private String link;
     private String proyecto;
     private String descripcion;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaCompletada;
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public Tarea(String idTarea, String link, String proyecto, String descripcion, LocalDateTime fechaCreacion, LocalDateTime fechaCompletada) {
         this.idTarea = idTarea;
