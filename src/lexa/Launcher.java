@@ -11,24 +11,24 @@ import javax.security.auth.login.LoginException;
 
 public class Launcher extends ListenerAdapter {
 
-    public static JDA jda;
+    private static JDA jda;
 
     public static void main(String[] args) {
-        jda = initJDA(args[0]);
-        if (jda != null) {
+        if (initJDA(args[0])) {
             initSettings();
             initListeners();
         }
     }
 
-    private static JDA initJDA(String token) {
-        JDA jdaAux = null;
+    private static boolean initJDA(String token) {
+        boolean initResult = false;
         try {
-            jdaAux = JDABuilder.createLight(token).build();
+            jda = JDABuilder.createLight(token).build();
+            initResult = true;
         } catch (LoginException ignored) {
             //Ignore exception
         }
-        return jdaAux;
+        return initResult;
     }
 
     private static void initSettings() {
@@ -39,4 +39,9 @@ public class Launcher extends ListenerAdapter {
     private static void initListeners() {
         jda.addEventListener(new GuildMessageListener());
     }
+
+    public static JDA getJda() {
+        return jda;
+    }
+
 }

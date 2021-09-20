@@ -124,7 +124,7 @@ public class TareasHelper {
     private static void saveTodasLasTareas(@NotNull GuildMessageReceivedEvent event) {
         List<Message> mensajes = getUltimosMensajes(event, true);
         if (!mensajes.isEmpty()) {
-            TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(CANAL_HISTORICO_TAREAS);
+            TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             for (Message tareaActual : mensajes) {
                 canalTareasHistorico.sendMessage(tareaActual).complete();
                 event.getChannel().deleteMessages(mensajes).complete();
@@ -136,7 +136,7 @@ public class TareasHelper {
         Message tareaAGuardar = buscarTareaPorID(event, args);
 
         if (tareaAGuardar != null) {
-            TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(CANAL_HISTORICO_TAREAS);
+            TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             canalTareasHistorico.sendMessage(tareaAGuardar).complete();
             event.getChannel().deleteMessageById(tareaAGuardar.getIdLong()).complete();
         } else {
@@ -158,7 +158,7 @@ public class TareasHelper {
         Message tareaAReabrir = buscarTareaPorID(event, args);
 
         if (tareaAReabrir != null) {
-            TextChannel canalTareas = CanalHelper.getCanalPorNombre(CANAL_TAREAS);
+            TextChannel canalTareas = CanalHelper.getCanalPorNombre(event, CANAL_TAREAS);
             canalTareas.sendMessage(tareaAReabrir).complete();
             event.getChannel().deleteMessageById(tareaAReabrir.getIdLong()).complete();
         } else {
