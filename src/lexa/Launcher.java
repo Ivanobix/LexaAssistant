@@ -26,7 +26,7 @@ public class Launcher extends ListenerAdapter {
         try {
             jdaAux = JDABuilder.createLight(token).build();
         } catch (LoginException ignored) {
-            //Ignore
+            //Ignore exception
         }
         return jdaAux;
     }
