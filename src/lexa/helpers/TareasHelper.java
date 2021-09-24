@@ -41,18 +41,21 @@ public class TareasHelper {
         Tarea tarea = new Tarea(arg); //Add descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
+        eliminarInserccionesUltimoMensaje(event);
     }
 
     private static void addTareaProyecto(@NotNull GuildMessageReceivedEvent event, String[] args) {
         Tarea tarea = new Tarea(args[1], args[2]); //Add proyecto descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
+        eliminarInserccionesUltimoMensaje(event);
     }
 
     private static void addTareaCompleta(@NotNull GuildMessageReceivedEvent event, String[] args) {
         Tarea tarea = new Tarea(args[1], args[2], args[3]); //Add link proyecto descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
+        eliminarInserccionesUltimoMensaje(event);
     }
 
     //------------------ DELETE TAREA ------------------//
@@ -259,5 +262,10 @@ public class TareasHelper {
 
         Message ultimoMensaje = event.getChannel().getHistory().retrievePast(1).complete().get(0);
         event.getChannel().deleteMessageById(ultimoMensaje.getIdLong()).completeAfter(1, TimeUnit.SECONDS);
+    }
+
+    private static void eliminarInserccionesUltimoMensaje(@NotNull GuildMessageReceivedEvent event) {
+        Message message = event.getChannel().getHistory().retrievePast(1).complete().get(0);
+        message.suppressEmbeds(true).complete();
     }
 }
