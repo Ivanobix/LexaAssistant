@@ -1,9 +1,12 @@
 package lexa.utils;
 
-public class Constantes {
+import java.util.Map;
+
+import static lexa.utils.Utils.obtenerConfiguraciones;
+
+public class Globals {
 
     //GENERAL
-    public static final String TOKEN_BOT = "ODg3MzY5MDc1MjMwMTQyNTQ0.YUDI2g.vMpUQaYIzyYvcJTvp2GSKKu0vJY";
     public static final String PREFIX = "!";
 
     //CANALES
@@ -12,7 +15,11 @@ public class Constantes {
     public static final String CANAL_IMPUTACIONES = "imputaciones";
     public static final String CANAL_HISTORICO_IMPUTACIONES = "historico-imputaciones";
     public static final String CANAL_HERRAMIENTAS = "herramientas";
+    public static final String CANAL_CONFIGURACIONES = "configuraciones";
 
-    private Constantes() {
+    //CONFIGURACIONES
+    public static final Map<String, String> CONFIGURACIONES = obtenerConfiguraciones();
+
+    private Globals() {
     }
 }

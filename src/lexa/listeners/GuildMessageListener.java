@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static lexa.utils.Constantes.*;
+import static lexa.utils.Globals.*;
 
 public class GuildMessageListener extends ListenerAdapter {
 

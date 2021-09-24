@@ -3,7 +3,7 @@ package lexa.plantillas;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static lexa.utils.Utils.ObtenerNuevoId;
+import static lexa.utils.Utils.obtenerNuevoId;
 
 public class Tarea {
 
@@ -25,7 +25,7 @@ public class Tarea {
     }
 
     public Tarea(String link, String proyecto, String descripcion) {
-        idTarea = ObtenerNuevoId();
+        idTarea = obtenerNuevoId();
         this.link = link;
         this.proyecto = proyecto;
         this.descripcion = descripcion;
@@ -35,7 +35,7 @@ public class Tarea {
     }
 
     public Tarea(String proyecto, String descripcion) {
-        idTarea = ObtenerNuevoId();
+        idTarea = obtenerNuevoId();
         link = "";
         this.proyecto = proyecto;
         this.descripcion = descripcion;
@@ -45,7 +45,7 @@ public class Tarea {
     }
 
     public Tarea(String descripcion) {
-        idTarea = ObtenerNuevoId();
+        idTarea = obtenerNuevoId();
         link = "";
         proyecto = "";
         this.descripcion = descripcion;

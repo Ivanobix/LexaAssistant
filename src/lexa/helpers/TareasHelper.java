@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static lexa.listeners.GuildMessageListener.*;
-import static lexa.utils.Constantes.*;
+import static lexa.utils.Globals.*;
 import static org.jinq.orm.stream.JinqStream.from;
 
 public class TareasHelper {
