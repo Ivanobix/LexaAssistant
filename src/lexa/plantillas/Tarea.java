@@ -3,11 +3,11 @@ package lexa.plantillas;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static lexa.utils.Globals.DATE_TIME_FORMATTER;
 import static lexa.utils.Utils.obtenerNuevoId;
 
 public class Tarea {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private String idTarea;
     private String link;
     private String proyecto;

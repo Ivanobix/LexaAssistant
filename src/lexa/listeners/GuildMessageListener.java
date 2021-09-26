@@ -22,6 +22,12 @@ public class GuildMessageListener extends ListenerAdapter {
         event.getChannel().deleteMessages(messages).completeAfter(1, TimeUnit.SECONDS);
     }
 
+    public static void avisarDatosIncorrectos(@NotNull GuildMessageReceivedEvent event) {
+        event.getMessage().getChannel().sendMessage("Los datos introducidos no son válidos.").complete();
+        List<Message> messages = event.getChannel().getHistory().retrievePast(2).complete();
+        event.getChannel().deleteMessages(messages).completeAfter(1, TimeUnit.SECONDS);
+    }
+
     public static void eliminarUltimoComando(@NotNull GuildMessageReceivedEvent event) {
         List<Message> messages = event.getChannel().getHistory().retrievePast(5).complete();
         Message mensajeAEliminar = null;

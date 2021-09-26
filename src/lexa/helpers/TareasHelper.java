@@ -19,11 +19,11 @@ import static org.jinq.orm.stream.JinqStream.from;
 
 public class TareasHelper {
 
-    //------------------ ADD TAREA ------------------//
-
     private TareasHelper() {
 
     }
+
+    //------------------ ADD TAREA ------------------//
 
     public static void addTarea(@NotNull GuildMessageReceivedEvent event, String[] args) {
         if (args.length == 2) {
