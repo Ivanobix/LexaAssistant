@@ -3,7 +3,6 @@ package lexa.plantillas;
 import java.time.LocalDate;
 
 import static lexa.utils.Globals.DATE_FORMATTER;
-import static lexa.utils.Globals.DATE_TIME_FORMATTER;
 import static lexa.utils.Utils.obtenerNuevoId;
 
 public class HorasExtra {
