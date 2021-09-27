@@ -7,25 +7,36 @@ import static lexa.utils.Utils.obtenerNuevoId;
 
 public class AsuntosPropios {
     private String idAsuntosPropios;
+    private String descripcion;
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;
     private String total;
     private boolean recuperar;
 
-    public AsuntosPropios(String idAsuntosPropios, LocalDateTime fechaInicio, LocalDateTime fechaFin, String total, boolean recuperar) {
+    public AsuntosPropios(String idAsuntosPropios, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin, String total, boolean recuperar) {
         this.idAsuntosPropios = idAsuntosPropios;
+        this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.total = total;
         this.recuperar = recuperar;
     }
 
-    public AsuntosPropios(LocalDateTime fechaInicio, LocalDateTime fechaFin, String total, boolean recuperar) {
+    public AsuntosPropios(String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin, String total, boolean recuperar) {
         idAsuntosPropios = obtenerNuevoId();
+        this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.total = total;
         this.recuperar = recuperar;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getIdAsuntosPropios() {
@@ -74,7 +85,7 @@ public class AsuntosPropios {
         String fechaFinFormateada = fechaFin.format(DATE_TIME_FORMATTER);
         String recuperarFormateado = recuperar ? "●●●" : "○○○";
 
-        return ":fleur_de_lis: ***" + idAsuntosPropios + " - Asuntos Propios: ***\n" +
+        return ":fleur_de_lis: ***" + idAsuntosPropios + " - " + descripcion + "***\n" +
                 "          :small_blue_diamond: *Inicio:*                → " + fechaInicioFormateada + "\n" +
                 "          :small_blue_diamond: *Fin:*                     → " + fechaFinFormateada + "\n" +
                 "          :small_blue_diamond: *Total:*                 → " + total + "\n" +

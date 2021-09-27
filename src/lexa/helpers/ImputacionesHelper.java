@@ -1,6 +1,7 @@
 package lexa.helpers;
 
 import lexa.plantillas.AsuntosPropios;
+import lexa.plantillas.HorasExtra;
 import lexa.plantillas.Vacaciones;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -48,6 +49,8 @@ public class ImputacionesHelper {
                 addVacaciones(event, args);
             } else if (args[1].equalsIgnoreCase("affair")) {
                 addAsuntosPropios(event, args);
+            } else if (args[1].equalsIgnoreCase("extra")) {
+                addHorasExtra(event, args);
             } else {
                 avisarComandoDesconocido(event);
             }
@@ -75,22 +78,41 @@ public class ImputacionesHelper {
     }
 
     private static void addAsuntosPropios(@NotNull GuildMessageReceivedEvent event, String[] args) {
-        if (args.length == 6) {
+        if (args.length == 7) {
             try {
-                LocalDateTime fechaInicio = LocalDateTime.parse(args[2], DATE_TIME_FORMATTER);
-                LocalDateTime fechaFin = LocalDateTime.parse(args[3], DATE_TIME_FORMATTER);
-                String total = args[4];
+                String descripcion = args[2];
+                LocalDateTime fechaInicio = LocalDateTime.parse(args[3], DATE_TIME_FORMATTER);
+                LocalDateTime fechaFin = LocalDateTime.parse(args[4], DATE_TIME_FORMATTER);
+                String total = args[5];
                 boolean devolver;
 
-                if (args[5].equalsIgnoreCase("Si"))
+                if (args[6].equalsIgnoreCase("Si"))
                     devolver = true;
-                else if (args[5].equalsIgnoreCase("No"))
+                else if (args[6].equalsIgnoreCase("No"))
                     devolver = false;
                 else
                     throw new IllegalArgumentException();
 
-                AsuntosPropios asuntosPropios = new AsuntosPropios(fechaInicio, fechaFin, total, devolver);
+                AsuntosPropios asuntosPropios = new AsuntosPropios(descripcion, fechaInicio, fechaFin, total, devolver);
                 event.getMessage().getChannel().sendMessage(asuntosPropios.toString()).complete();
+                eliminarUltimoComando(event);
+            } catch (Exception e) {
+                avisarDatosIncorrectos(event);
+            }
+        } else {
+            avisarDatosIncorrectos(event);
+        }
+    }
+
+    private static void addHorasExtra(@NotNull GuildMessageReceivedEvent event, String[] args) {
+        if (args.length == 5) {
+            try {
+                String motivo = args[2];
+                LocalDate dia = LocalDate.parse(args[3], DATE_FORMATTER);
+                String tiempo = args[4];
+
+                HorasExtra horasExtra = new HorasExtra(motivo, dia, tiempo);
+                event.getMessage().getChannel().sendMessage(horasExtra.toString()).complete();
                 eliminarUltimoComando(event);
             } catch (Exception e) {
                 avisarDatosIncorrectos(event);
