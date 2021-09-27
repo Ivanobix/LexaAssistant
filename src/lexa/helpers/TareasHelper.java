@@ -130,6 +130,7 @@ public class TareasHelper {
             TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             for (Message tareaActual : mensajes) {
                 canalTareasHistorico.sendMessage(tareaActual).complete();
+                eliminarInserccionesUltimoMensaje(event);
                 event.getChannel().deleteMessages(mensajes).complete();
             }
         }
@@ -141,6 +142,7 @@ public class TareasHelper {
         if (tareaAGuardar != null) {
             TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             canalTareasHistorico.sendMessage(tareaAGuardar).complete();
+            eliminarInserccionesUltimoMensaje(event);
             event.getChannel().deleteMessageById(tareaAGuardar.getIdLong()).complete();
         } else {
             avisarTareaIndicadaNoExiste(event);
@@ -163,6 +165,7 @@ public class TareasHelper {
         if (tareaAReabrir != null) {
             TextChannel canalTareas = CanalHelper.getCanalPorNombre(event, CANAL_TAREAS);
             canalTareas.sendMessage(tareaAReabrir).complete();
+            eliminarInserccionesUltimoMensaje(event);
             event.getChannel().deleteMessageById(tareaAReabrir.getIdLong()).complete();
         } else {
             avisarTareaIndicadaNoExiste(event);
@@ -191,6 +194,7 @@ public class TareasHelper {
 
         for (Tarea tareaAEnviar : tareasAOrdenarAux) {
             event.getChannel().sendMessage(tareaAEnviar.toString()).complete();
+            eliminarInserccionesUltimoMensaje(event);
         }
     }
 
@@ -200,6 +204,7 @@ public class TareasHelper {
 
         for (Tarea tareaAEnviar : tareasAOrdenarAux) {
             event.getChannel().sendMessage(tareaAEnviar.toString()).complete();
+            eliminarInserccionesUltimoMensaje(event);
         }
     }
 
