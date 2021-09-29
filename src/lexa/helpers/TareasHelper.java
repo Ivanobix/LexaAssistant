@@ -41,21 +41,21 @@ public class TareasHelper {
         Tarea tarea = new Tarea(arg); //Add descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
-        eliminarInserccionesUltimoMensaje(event);
+        eliminarInserccionesUltimoMensaje(event.getChannel());
     }
 
     private static void addTareaProyecto(@NotNull GuildMessageReceivedEvent event, String[] args) {
         Tarea tarea = new Tarea(args[1], args[2]); //Add proyecto descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
-        eliminarInserccionesUltimoMensaje(event);
+        eliminarInserccionesUltimoMensaje(event.getChannel());
     }
 
     private static void addTareaCompleta(@NotNull GuildMessageReceivedEvent event, String[] args) {
         Tarea tarea = new Tarea(args[1], args[2], args[3]); //Add link proyecto descripcion
         event.getMessage().getChannel().sendMessage(tarea.toString()).complete();
         eliminarUltimoComando(event);
-        eliminarInserccionesUltimoMensaje(event);
+        eliminarInserccionesUltimoMensaje(event.getChannel());
     }
 
     //------------------ DELETE TAREA ------------------//
@@ -130,7 +130,7 @@ public class TareasHelper {
             TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             for (Message tareaActual : mensajes) {
                 canalTareasHistorico.sendMessage(tareaActual).complete();
-                eliminarInserccionesUltimoMensaje(event);
+                eliminarInserccionesUltimoMensaje(canalTareasHistorico);
                 event.getChannel().deleteMessages(mensajes).complete();
             }
         }
@@ -142,7 +142,7 @@ public class TareasHelper {
         if (tareaAGuardar != null) {
             TextChannel canalTareasHistorico = CanalHelper.getCanalPorNombre(event, CANAL_HISTORICO_TAREAS);
             canalTareasHistorico.sendMessage(tareaAGuardar).complete();
-            eliminarInserccionesUltimoMensaje(event);
+            eliminarInserccionesUltimoMensaje(canalTareasHistorico);
             event.getChannel().deleteMessageById(tareaAGuardar.getIdLong()).complete();
         } else {
             avisarTareaIndicadaNoExiste(event);
@@ -165,7 +165,7 @@ public class TareasHelper {
         if (tareaAReabrir != null) {
             TextChannel canalTareas = CanalHelper.getCanalPorNombre(event, CANAL_TAREAS);
             canalTareas.sendMessage(tareaAReabrir).complete();
-            eliminarInserccionesUltimoMensaje(event);
+            eliminarInserccionesUltimoMensaje(canalTareas);
             event.getChannel().deleteMessageById(tareaAReabrir.getIdLong()).complete();
         } else {
             avisarTareaIndicadaNoExiste(event);
@@ -194,7 +194,7 @@ public class TareasHelper {
 
         for (Tarea tareaAEnviar : tareasAOrdenarAux) {
             event.getChannel().sendMessage(tareaAEnviar.toString()).complete();
-            eliminarInserccionesUltimoMensaje(event);
+            eliminarInserccionesUltimoMensaje(event.getChannel());
         }
     }
 
@@ -204,7 +204,7 @@ public class TareasHelper {
 
         for (Tarea tareaAEnviar : tareasAOrdenarAux) {
             event.getChannel().sendMessage(tareaAEnviar.toString()).complete();
-            eliminarInserccionesUltimoMensaje(event);
+            eliminarInserccionesUltimoMensaje(event.getChannel());
         }
     }
 
@@ -269,8 +269,8 @@ public class TareasHelper {
         event.getChannel().deleteMessageById(ultimoMensaje.getIdLong()).completeAfter(1, TimeUnit.SECONDS);
     }
 
-    private static void eliminarInserccionesUltimoMensaje(@NotNull GuildMessageReceivedEvent event) {
-        Message message = event.getChannel().getHistory().retrievePast(1).complete().get(0);
+    private static void eliminarInserccionesUltimoMensaje(TextChannel textChannel) {
+        Message message = textChannel.getHistory().retrievePast(1).complete().get(0);
         message.suppressEmbeds(true).complete();
     }
 }
