@@ -232,7 +232,7 @@ public class TareasHelper {
             saveTarea(event, args);
         else if (args[0].equalsIgnoreCase(PREFIX + "orderBy"))
             orderByTarea(event, args);
-        else
+        else if (args[0].startsWith(PREFIX))
             avisarComandoDesconocido(event);
     }
 

@@ -42,6 +42,11 @@ public class GuildMessageListener extends ListenerAdapter {
         }
     }
 
+    public static void eliminarTodosLosMensajes(@NotNull GuildMessageReceivedEvent event) {
+        List<Message> messages = event.getChannel().getHistory().retrievePast(100).complete();
+        event.getChannel().deleteMessages(messages).complete();
+    }
+
     public static List<Message> getUltimosMensajes(@NotNull GuildMessageReceivedEvent event, boolean ignorarComandos) {
         List<Message> mensajes = event.getChannel().getHistory().retrievePast(100).complete();
         List<Message> mensajesADevolver = new ArrayList<>();
@@ -62,26 +67,29 @@ public class GuildMessageListener extends ListenerAdapter {
 
         String[] args = event.getMessage().getContentRaw().split("  ");
         if (args.length > 0) {
-            String canal = event.getMessage().getChannel().getName();
-
-            switch (canal) {
-                case CANAL_TAREAS:
-                    TareasHelper.comprobarComandosCanalTareas(event, args);
-                    break;
-                case CANAL_HISTORICO_TAREAS:
-                    TareasHelper.comprobarComandosCanalHistoricoTareas(event, args);
-                    break;
-                case CANAL_IMPUTACIONES:
-                    ImputacionesHelper.comprobarComandosCanalImputaciones(event, args);
-                    break;
-                case CANAL_HISTORICO_IMPUTACIONES:
-                    ImputacionesHelper.comprobarComandosCanalHistoricoImputaciones(event, args);
-                    break;
-                case CANAL_HERRAMIENTAS:
-                    HerramientasHelper.comprobarComandosCanalHerramientas(event, args);
-                    break;
-                default:
-                    break;
+            if (args[0].equalsIgnoreCase(PREFIX + "clear")) {
+                eliminarTodosLosMensajes(event);
+            } else {
+                String canal = event.getMessage().getChannel().getName();
+                switch (canal) {
+                    case CANAL_TAREAS:
+                        TareasHelper.comprobarComandosCanalTareas(event, args);
+                        break;
+                    case CANAL_HISTORICO_TAREAS:
+                        TareasHelper.comprobarComandosCanalHistoricoTareas(event, args);
+                        break;
+                    case CANAL_IMPUTACIONES:
+                        ImputacionesHelper.comprobarComandosCanalImputaciones(event, args);
+                        break;
+                    case CANAL_HISTORICO_IMPUTACIONES:
+                        ImputacionesHelper.comprobarComandosCanalHistoricoImputaciones(event, args);
+                        break;
+                    case CANAL_HERRAMIENTAS:
+                        HerramientasHelper.comprobarComandosCanalHerramientas(event, args);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
