@@ -1,6 +1,5 @@
 package lexa.listeners;
 
-import lexa.helpers.HerramientasHelper;
 import lexa.helpers.ImputacionesHelper;
 import lexa.helpers.TareasHelper;
 import net.dv8tion.jda.api.entities.Message;
@@ -83,9 +82,6 @@ public class GuildMessageListener extends ListenerAdapter {
                         break;
                     case CANAL_HISTORICO_IMPUTACIONES:
                         ImputacionesHelper.comprobarComandosCanalHistoricoImputaciones(event, args);
-                        break;
-                    case CANAL_HERRAMIENTAS:
-                        HerramientasHelper.comprobarComandosCanalHerramientas(event, args);
                         break;
                     default:
                         break;
