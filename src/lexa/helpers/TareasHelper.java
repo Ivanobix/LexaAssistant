@@ -104,8 +104,8 @@ public class TareasHelper {
 
         if (tareaACerrar != null) {
             String contenidoTareaCerrada = tareaACerrar.getContentRaw();
-            if (contenidoTareaCerrada.endsWith("→ ")) {
-                contenidoTareaCerrada += " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern(String.valueOf(DATE_TIME_FORMATTER)));
+            if (contenidoTareaCerrada.endsWith("→")) {
+                contenidoTareaCerrada += " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
                 event.getChannel().editMessageById(tareaACerrar.getIdLong(), contenidoTareaCerrada).complete();
             }
         } else {
